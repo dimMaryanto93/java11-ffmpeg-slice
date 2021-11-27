@@ -1,0 +1,109 @@
+package com.maryanto.dimas.example;
+
+import com.maryanto.dimas.example.model.Video;
+import lombok.extern.slf4j.Slf4j;
+import net.bramp.ffmpeg.FFmpeg;
+import net.bramp.ffmpeg.FFmpegExecutor;
+import net.bramp.ffmpeg.FFmpegUtils;
+import net.bramp.ffmpeg.FFprobe;
+import net.bramp.ffmpeg.builder.FFmpegBuilder;
+import net.bramp.ffmpeg.probe.FFmpegProbeResult;
+import net.bramp.ffmpeg.progress.Progress;
+import net.bramp.ffmpeg.progress.ProgressListener;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Hello world!
+ */
+@Slf4j
+public class App {
+    FFmpeg ffmpeg;
+    FFprobe ffprobe;
+
+    public App() throws IOException {
+        this.ffmpeg = new FFmpeg();
+        this.ffprobe = new FFprobe();
+    }
+
+    public static String getHomeDir() {
+        return System.getProperty("user.home");
+    }
+
+    public void splitVideo(String courseName, String section, String file, Video timeline) throws IOException {
+        FFmpegProbeResult input = ffprobe.probe(file);
+
+        // count between 00:00:00 to startAt video play
+        LocalTime start = LocalTime.parse("00:00:00");
+        long startOffset = start.until(timeline.getTimeStart(), ChronoUnit.SECONDS);
+
+        // count between startAt to end playback
+        long duration = timeline.getTimeStart().until(timeline.getTimeEnd(), ChronoUnit.SECONDS);
+
+        String outputDir = new StringBuilder(getHomeDir()).append(File.separator)
+                .append("Videos").append(File.separator)
+                .append("Udemy").append(File.separator)
+                .append(courseName).append(File.separator)
+                .append(section).append(File.separator).toString();
+
+        File dir = new File(outputDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        FFmpegBuilder builder = this.ffmpeg.builder().addInput(input).overrideOutputFiles(true)
+                .addOutput(outputDir + timeline.getExportFilename())
+                .setStartOffset(startOffset, TimeUnit.SECONDS)
+                .setDuration(duration, TimeUnit.SECONDS)
+                .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)
+                .done();
+
+        FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
+        executor.createJob(builder, new ProgressListener() {
+
+            final double duration_ns = input.getFormat().duration * TimeUnit.SECONDS.toNanos(5000);
+
+            @Override
+            public void progress(Progress progress) {
+                double percentage = progress.out_time_ns / duration_ns;
+                log.info("filename: {} -> {} status: {} time: {} ms",
+                        input.getFormat().filename,
+                        String.format("[%.0f%%]", (percentage * 100)),
+                        progress.status,
+                        FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS)
+                );
+            }
+        }).run();
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        App convert = new App();
+        String version = convert.ffmpeg.version();
+        log.info("ffmpeg version is {}", version);
+
+        List<Video> timelines = Arrays.asList(
+                new Video("01-what-is-ci.mp4", "00:00:00", "00:07:24"),
+                new Video("02-arch-infra-and-software-ci.mp4", "00:07:24", "00:16:09"),
+                new Video("03-setup-basic-configuration.mp4", "00:16:09", "00:28:32"),
+                new Video("04-install-gitlab.mp4", "00:28:32", "00:34:32"),
+                new Video("05-install-nexus-oss.mp4", "00:34:32", "00:47:09"),
+                new Video("06-install-docker.mp4", "00:47:09", "00:53:31"),
+                new Video("07-install-gitlab-runner.mp4", "00:53:31", "01:00:41"),
+                new Video("08-install-gitlab-runner.mp4", "01:00:41", "01:04:25")
+        );
+
+        for (Video video : timelines) {
+            convert.splitVideo("docker", "11-study-cases","D:\\Downloads\\udemy-course\\exports\\12a-setup-gitlab-ci.mp4", video);
+        }
+
+    }
+}
