@@ -70,8 +70,8 @@ public class App {
             @Override
             public void progress(Progress progress) {
                 double percentage = progress.out_time_ns / duration_ns;
-                log.info("filename: {} -> {} status: {} time: {} ms",
-                        input.getFormat().filename,
+                log.info("\nexported filename: {} -> {} \nstatus: {} time: {} ms",
+                        timeline.getExportFilename(),
                         String.format("[%.0f%%]", (percentage * 100)),
                         progress.status,
                         FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS)
@@ -93,7 +93,7 @@ public class App {
         );
 
         for (Video video : timelines) {
-            convert.splitVideo("docker", "11-study-cases","/Volumes/Samsung\\ SSD/Udemy/docker/exports/12b-gitlab-ci-yaml.mp4", video);
+            convert.splitVideo("docker", "11-study-cases","/Volumes/SamsungSSD/Udemy/docker/exports/12b-gitlab-ci-yaml.mp4", video);
         }
 
     }
