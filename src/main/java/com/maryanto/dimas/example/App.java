@@ -13,17 +13,12 @@ import net.bramp.ffmpeg.progress.ProgressListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Hello world!
- */
 @Slf4j
 public class App {
     FFmpeg ffmpeg;
@@ -61,15 +56,16 @@ public class App {
 
         FFmpegBuilder builder = this.ffmpeg.builder().addInput(input).overrideOutputFiles(true)
                 .addOutput(outputDir + timeline.getExportFilename())
-                .setStartOffset(startOffset, TimeUnit.SECONDS)
-                .setDuration(duration, TimeUnit.SECONDS)
+                    .setStartOffset(startOffset, TimeUnit.SECONDS)
+                    .setDuration(duration, TimeUnit.SECONDS)
+                    .setVideoResolution(1920, 1080)
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)
                 .done();
 
         FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
         executor.createJob(builder, new ProgressListener() {
 
-            final double duration_ns = input.getFormat().duration * TimeUnit.SECONDS.toNanos(5000);
+            final double duration_ns = input.getFormat().duration * TimeUnit.SECONDS.toNanos(1);
 
             @Override
             public void progress(Progress progress) {
