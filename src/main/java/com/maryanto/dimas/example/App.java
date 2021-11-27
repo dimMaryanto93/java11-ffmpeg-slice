@@ -87,18 +87,13 @@ public class App {
         log.info("ffmpeg version is {}", version);
 
         List<Video> timelines = Arrays.asList(
-                new Video("01-what-is-ci.mp4", "00:00:00", "00:07:24"),
-                new Video("02-arch-infra-and-software-ci.mp4", "00:07:24", "00:16:09"),
-                new Video("03-setup-basic-configuration.mp4", "00:16:09", "00:28:32"),
-                new Video("04-install-gitlab.mp4", "00:28:32", "00:34:32"),
-                new Video("05-install-nexus-oss.mp4", "00:34:32", "00:47:09"),
-                new Video("06-install-docker.mp4", "00:47:09", "00:53:31"),
-                new Video("07-install-gitlab-runner.mp4", "00:53:31", "01:00:41"),
-                new Video("08-test-gitlab-ci-script.mp4", "01:00:41", "01:04:25")
+                new Video("01-what-is-gitlab-ci-file.mp4", "00:00:00", "00:05:51"),
+                new Video("02-basic-usage-gitlab-ci.mp4", "00:05:51", "00:17:04"),
+                new Video("03-gitlab-ci-workflows.mp4", "00:17:04", "00:26:10")
         );
 
         for (Video video : timelines) {
-            convert.splitVideo("docker", "11-study-cases","D:\\Downloads\\udemy-course\\exports\\12a-setup-gitlab-ci.mp4", video);
+            convert.splitVideo("docker", "11-study-cases","/Volumes/Samsung\\ SSD/Udemy/docker/exports/12b-gitlab-ci-yaml.mp4", video);
         }
 
     }
