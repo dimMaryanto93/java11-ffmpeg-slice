@@ -94,7 +94,7 @@ public class App {
                 new Video("05-install-nexus-oss.mp4", "00:34:32", "00:47:09"),
                 new Video("06-install-docker.mp4", "00:47:09", "00:53:31"),
                 new Video("07-install-gitlab-runner.mp4", "00:53:31", "01:00:41"),
-                new Video("08-install-gitlab-runner.mp4", "01:00:41", "01:04:25")
+                new Video("08-test-gitlab-ci-script.mp4", "01:00:41", "01:04:25")
         );
 
         for (Video video : timelines) {
