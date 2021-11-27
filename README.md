@@ -1,6 +1,6 @@
 ## User Guide
 
-Untuk menggunakan project ini, kita membutuhkan binnary `ffmpeg` dan `ffprobe` dengan cara install
+Simple slice video by duration using ffmpeg plugin, Untuk menggunakan project ini, kita membutuhkan binnary `ffmpeg` dan `ffprobe` dengan cara install
 
 ### Install ffmpeg di windows
 
