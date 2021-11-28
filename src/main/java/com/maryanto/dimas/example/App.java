@@ -59,6 +59,8 @@ public class App {
                     .setStartOffset(startOffset, TimeUnit.SECONDS)
                     .setDuration(duration, TimeUnit.SECONDS)
                     .setVideoResolution(1920, 1080)
+                    .setVideoCodec("copy")
+                    .setAudioCodec("copy")
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)
                 .done();
 
@@ -97,7 +99,7 @@ public class App {
         );
 
         for (Video video : timelines) {
-            convert.splitVideo("docker", "11-study-cases","/Volumes/SamsungSSD/Udemy/docker/exports/12b-gitlab-ci-yaml.mp4", video);
+            convert.splitVideo("docker", "11-study-cases","D:\\Downloads\\udemy-course\\12b-gitlab-ci-yaml.mp4", video);
         }
 
     }
