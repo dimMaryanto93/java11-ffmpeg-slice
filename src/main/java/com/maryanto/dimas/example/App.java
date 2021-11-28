@@ -89,7 +89,11 @@ public class App {
         List<Video> timelines = Arrays.asList(
                 new Video("01-what-is-gitlab-ci-file.mp4", "00:00:00", "00:05:51"),
                 new Video("02-basic-usage-gitlab-ci.mp4", "00:05:51", "00:17:04"),
-                new Video("03-gitlab-ci-workflows.mp4", "00:17:04", "00:26:10")
+                new Video("03-gitlab-ci-workflows.mp4", "00:17:04", "00:26:10"),
+                new Video("04-gitlab-ci-variables.mp4", "00:26:10", "00:49:03"),
+                new Video("05-gitlab-ci-services.mp4", "00:49:03", "00:59:02"),
+                new Video("06-gitlab-ci-dind.mp4", "00:59:02", "01:11:54"),
+                new Video("07-gitlab-ci-cleanup.mp4", "01:11:54", "01:16:12")
         );
 
         for (Video video : timelines) {
