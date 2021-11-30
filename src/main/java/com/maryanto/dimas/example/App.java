@@ -11,7 +11,6 @@ import java.util.Arrays;
 @Slf4j
 public class App {
 
-
     public static void main(String[] args) throws IOException {
         FFMpegService convert = new FFMpegService();
         String version = convert.getFFMpegVersion();
