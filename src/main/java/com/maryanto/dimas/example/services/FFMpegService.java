@@ -41,8 +41,6 @@ public class FFMpegService {
     }
 
     public void splitVideo(String courseName, String section, String file, Timeline timeline) throws IOException {
-        FFmpegProbeResult input = ffprobe.probe(file);
-
         // count between 00:00:00 to startAt video play
         LocalTime start = LocalTime.parse("00:00:00");
         long startOffset = start.until(timeline.getTimeStart(), ChronoUnit.SECONDS);
@@ -50,11 +48,22 @@ public class FFMpegService {
         // count between startAt to end playback
         long duration = timeline.getTimeStart().until(timeline.getTimeEnd(), ChronoUnit.SECONDS);
 
+        File originalFile = new File(file);
+        if (!originalFile.exists())
+            throw new IOException("File video not found");
+
+        if (originalFile.isDirectory())
+            throw new IOException("File is video, change to video path");
+
+        FFmpegProbeResult input = ffprobe.probe(file);
+
         String outputDir = new StringBuilder(getHomeDir()).append(File.separator)
                 .append("Videos").append(File.separator)
                 .append("Udemy").append(File.separator)
                 .append(courseName).append(File.separator)
-                .append(section).append(File.separator).toString();
+                .append(section).append(File.separator)
+                .append(originalFile.getName()).append(File.separator)
+                .toString();
 
         File dir = new File(outputDir);
         if (!dir.exists()) {
@@ -63,9 +72,11 @@ public class FFMpegService {
 
         FFmpegBuilder builder = this.ffmpeg.builder().addInput(input).overrideOutputFiles(true)
                 .addOutput(outputDir + timeline.getExportFilename())
-                .setStartOffset(startOffset, TimeUnit.SECONDS)
-                .setDuration(duration, TimeUnit.SECONDS)
-                .setVideoResolution(1920, 1080)
+                    .setStartOffset(startOffset, TimeUnit.SECONDS)
+                    .setDuration(duration, TimeUnit.SECONDS)
+                    .setVideoResolution(1920, 1080)
+                    .setVideoCodec("copy")
+                    .setAudioCodec("copy")
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)
                 .done();
 
