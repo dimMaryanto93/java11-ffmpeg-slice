@@ -1,14 +1,14 @@
 package com.maryanto.dimas.example.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @ToString(exclude = {"timelines", "tags"})
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Video {
 
