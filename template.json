@@ -1,41 +1,31 @@
 {
-  "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10d-compose-angular-deploy.mp4",
+  "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10e-deploy-httpd-ssl-docker.mp4",
   "courseName": "docker",
   "sectionName": "09-study-cases",
-  "markers": "CHAPTER00=00:00:00.000\nCHAPTER00NAME=Introduction\nCHAPTER01=00:01:09.083\nCHAPTER01NAME=Development on local environment\nCHAPTER02=00:10:40.949\nCHAPTER02NAME=Development on docker environment\nCHAPTER03=00:26:19.649\nCHAPTER03NAME=Deployment for production ready\nCHAPTER04=00:35:21.782\nCHAPTER04NAME=Push image to hub.docker.com\nCHAPTER05=00:36:23.432\nCHAPTER05NAME=Push image to insecure registry\nCHAPTER06=00:39:48.748\nCHAPTER06NAME=End\n",
+  "markers": "CHAPTER00=00:00:00.000\nCHAPTER00NAME=Introduction\nCHAPTER01=00:02:04.633\nCHAPTER01NAME=Setup https as reverse proxy\nCHAPTER02=00:32:17.466\nCHAPTER02NAME=Run ssl/https from docker container",
   "description": "",
   "tags": [
     "docker",
     "compose",
-    "angular",
+    "laravel",
     "studycases",
     "udemy"
   ],
   "timelines": [
     {
-      "exportFilename": "01-angular-introduction.mp4",
+      "exportFilename": "01-laravel-ssl-intro.mp4",
       "timeStart": "00:00:00",
-      "timeEnd": "00:01:09"
+      "timeEnd": "00:02:04"
     },
     {
-      "exportFilename": "02-angular-deploy-local.mp4",
-      "timeStart": "00:01:09",
-      "timeEnd": "00:10:40"
+      "exportFilename": "02-laravel-ssl-as-reverse-proxy.mp4",
+      "timeStart": "00:02:04",
+      "timeEnd": "00:32:17"
     },
     {
-      "exportFilename": "03-angular-deploy-docker-dev.mp4",
-      "timeStart": "00:10:40",
-      "timeEnd": "00:26:19"
-    },
-    {
-      "exportFilename": "04-angular-deploy-docker-prod.mp4",
-      "timeStart": "00:26:19",
-      "timeEnd": "00:35:21"
-    },
-    {
-      "exportFilename": "05-angular-push-registry.mp4",
-      "timeStart": "00:35:21",
-      "timeEnd": "00:39:48"
+      "exportFilename": "03-laravel-ssl-docker.mp4",
+      "timeStart": "00:32:17",
+      "timeEnd": "00:55:56"
     }
   ]
 }
