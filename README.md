@@ -45,3 +45,9 @@ How to using this program, first you need JDK/JRE 11 on local machine dan ffmpeg
 ```bash
 java -jar target/ffmpeg-split-video-1.0.0-jar-with-dependencies.jar template.json
 ```
+
+3. After you execute, video export location is `${home}/${courseName}/${sectionName}/${filename-pathToVideo}/`
+   1. var `${home}`, user directory berdasarkan OS, jika windows default `C:/User/your-user`
+   2. var `${courseName}`
+   3. var `${sectionName}`
+   4. var `${filename-pathToVideo}`, adalah nama dari file video yang kita input
