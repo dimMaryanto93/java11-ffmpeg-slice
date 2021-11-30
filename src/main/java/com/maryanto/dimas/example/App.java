@@ -7,6 +7,8 @@ import com.maryanto.dimas.example.services.ScreenflowMarkersToYoutubeClipService
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
 
 @Slf4j
 public class App {
@@ -15,8 +17,14 @@ public class App {
         FFMpegService convert = new FFMpegService();
         String version = convert.getFFMpegVersion();
         log.info("ffmpeg version is {}", version);
+        Video video;
+        Optional<String> param = Arrays.stream(args).findFirst();
 
-        Video video = JsonTemplateLoaderService.getVideoValue("/courses/docker/09-study-cases/10a-compose-php-deploy.json");
+        if (param.isPresent()){
+            video = JsonTemplateLoaderService.getFromExternal(param.get());
+        }else {
+            video = JsonTemplateLoaderService.getFromLocalResources("/video.template.json");
+        }
         video.getTimelines().forEach(time -> {
             try {
                 convert.splitVideo(video.getCourseName(), video.getSectionName(), video.getPathToVideo(), time);

@@ -1,0 +1,36 @@
+{
+  "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10b-compose-laravel-deploy.mp4",
+  "courseName": "docker",
+  "sectionName": "09-study-cases",
+  "markers": "CHAPTER00=00:00:00.000\nCHAPTER00NAME=Introduction\nCHAPTER01=00:01:21.483\nCHAPTER01NAME=Development on local env using compose file\nCHAPTER02=00:13:01.333\nCHAPTER02NAME=Development on docker env using compose file\nCHAPTER03=00:39:22.199\nCHAPTER03NAME=Deployment for production ready using compose file",
+  "description": "",
+  "tags": [
+    "docker",
+    "compose",
+    "laravel",
+    "studycases",
+    "udemy"
+  ],
+  "timelines": [
+    {
+      "exportFilename": "01-laravel-introduction.mp4",
+      "timeStart": "00:00:00",
+      "timeEnd": "00:01:21"
+    },
+    {
+      "exportFilename": "02-laravel-compose-local.mp4",
+      "timeStart": "00:01:21",
+      "timeEnd": "00:13:01"
+    },
+    {
+      "exportFilename": "03-laravel-compose-dev.mp4",
+      "timeStart": "00:13:01",
+      "timeEnd": "00:39:22"
+    },
+    {
+      "exportFilename": "04-laravel-compose-prod.mp4",
+      "timeStart": "00:39:22",
+      "timeEnd": "00:50:45"
+    }
+  ]
+}
