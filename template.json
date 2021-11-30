@@ -1,36 +1,41 @@
 {
-  "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10b-compose-laravel-deploy.mp4",
+  "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10c-compose-springboot-deploy.mp4",
   "courseName": "docker",
   "sectionName": "09-study-cases",
-  "markers": "CHAPTER00=00:00:00.000\nCHAPTER00NAME=Introduction\nCHAPTER01=00:01:21.483\nCHAPTER01NAME=Development on local env using compose file\nCHAPTER02=00:13:01.333\nCHAPTER02NAME=Development on docker env using compose file\nCHAPTER03=00:39:22.199\nCHAPTER03NAME=Deployment for production ready using compose file",
+  "markers": "CHAPTER00=00:00:00.000\nCHAPTER00NAME=Introduction\nCHAPTER01=00:01:48.866\nCHAPTER01NAME=Development on Local Environment\nCHAPTER02=00:12:02.999\nCHAPTER02NAME=Development on docker environment\nCHAPTER03=00:22:07.015\nCHAPTER03NAME=Deployment for Production ready\nCHAPTER04=00:46:59.115\nCHAPTER04NAME=Push the image to hub.docker.com\nCHAPTER05=00:47:50.381\nCHAPTER05NAME=Push image to insecure registry\n",
   "description": "",
   "tags": [
     "docker",
     "compose",
-    "laravel",
+    "springboot",
     "studycases",
     "udemy"
   ],
   "timelines": [
     {
-      "exportFilename": "01-laravel-introduction.mp4",
+      "exportFilename": "01-spring-introduction.mp4",
       "timeStart": "00:00:00",
-      "timeEnd": "00:01:21"
+      "timeEnd": "00:01:48"
     },
     {
-      "exportFilename": "02-laravel-compose-local.mp4",
-      "timeStart": "00:01:21",
-      "timeEnd": "00:13:01"
+      "exportFilename": "02-spring-deploy-local.mp4",
+      "timeStart": "00:01:48",
+      "timeEnd": "00:12:02"
     },
     {
-      "exportFilename": "03-laravel-compose-dev.mp4",
-      "timeStart": "00:13:01",
-      "timeEnd": "00:39:22"
+      "exportFilename": "03-spring-deploy-docker.mp4",
+      "timeStart": "00:12:02",
+      "timeEnd": "00:22:07"
     },
     {
-      "exportFilename": "04-laravel-compose-prod.mp4",
-      "timeStart": "00:39:22",
-      "timeEnd": "00:55:11"
+      "exportFilename": "04-spring-deploy-prod.mp4",
+      "timeStart": "00:22:07",
+      "timeEnd": "00:46:59"
+    },
+    {
+      "exportFilename": "05-spring-push-registry.mp4",
+      "timeStart": "00:46:59",
+      "timeEnd": "00:50:45"
     }
   ]
 }
