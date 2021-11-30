@@ -1,22 +1,17 @@
 package com.maryanto.dimas.example.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class Video {
-    private String exportFilename;
-    private LocalTime timeStart;
-    private LocalTime timeEnd;
 
-    public Video(String exportFilename, String timeStart, String timeEnd) {
-        this.exportFilename = exportFilename;
-        this.timeStart = LocalTime.parse(timeStart);
-        this.timeEnd = LocalTime.parse(timeEnd);
-    }
+    private String pathToVideo;
+    private String markers;
+    private List<Timeline> timelines = new ArrayList<>();
 }
