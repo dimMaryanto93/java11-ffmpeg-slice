@@ -29,7 +29,7 @@ public class App {
         if (videoFilename.isPresent()) {
             video = JsonTemplateLoaderService.getFromExternal(videoFilename.get());
         } else {
-            throw new FileNotFoundException("java first argument is required! ex: java -jar application.jar template.json");
+            throw new FileNotFoundException("template.json argument is required! ex: java -jar application.jar path-to/template.json");
         }
 
         if (!video.getPathToMarker().isBlank()) {
