@@ -13,14 +13,6 @@ import java.nio.charset.StandardCharsets;
 
 public class JsonTemplateLoaderService {
 
-    public static Video getFromLocalResources(String filename) throws IOException {
-        String content = IOUtils.resourceToString(filename, StandardCharsets.UTF_8);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper.readValue(content, Video.class);
-    }
-
     public static Video getFromExternal(String filename) throws IOException {
         String content = FileUtils.readFileToString(new File(filename), StandardCharsets.UTF_8);
 

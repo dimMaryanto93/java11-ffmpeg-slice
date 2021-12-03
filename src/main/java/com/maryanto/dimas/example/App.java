@@ -1,12 +1,17 @@
 package com.maryanto.dimas.example;
 
+import com.maryanto.dimas.example.model.Timeline;
 import com.maryanto.dimas.example.model.Video;
 import com.maryanto.dimas.example.services.FFMpegService;
 import com.maryanto.dimas.example.services.JsonTemplateLoaderService;
 import com.maryanto.dimas.example.services.ScreenflowMarkersToYoutubeClipService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -17,23 +22,28 @@ public class App {
         FFMpegService convert = new FFMpegService();
         String version = convert.getFFMpegVersion();
         log.info("ffmpeg version is {}", version);
+
+        Optional<String> videoFilename = Arrays.stream(args).findFirst();
         Video video;
-        Optional<String> param = Arrays.stream(args).findFirst();
-
-        if (param.isPresent()){
-            video = JsonTemplateLoaderService.getFromExternal(param.get());
-        }else {
-            video = JsonTemplateLoaderService.getFromLocalResources("/video.template.json");
+        if (videoFilename.isPresent()) {
+            video = JsonTemplateLoaderService.getFromExternal(videoFilename.get());
+        } else {
+            throw new FileNotFoundException("java first argument is required! ex: java -jar application.jar template.json");
         }
-        video.getTimelines().forEach(time -> {
-            try {
-                convert.splitVideo(video.getCourseName(), video.getSectionName(), video.getPathToVideo(), time);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
 
-        String marker = ScreenflowMarkersToYoutubeClipService.convert(video.getMarkers());
-        log.info("---marker---\n{}", marker);
+        if (!video.getPathToMarker().isBlank()) {
+            File file = new File(video.getPathToMarker());
+            if (!file.exists()) {
+                throw new FileNotFoundException("marker from subler file " + video.getPathToMarker() + " not found!");
+            }
+            String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+            video.setTimelines(ScreenflowMarkersToYoutubeClipService.convertToTimeline(content));
+            video.setTableOfContents(ScreenflowMarkersToYoutubeClipService.convertToYoutubeDescription(content));
+        }
+
+        for (Timeline time : video.getTimelines()) {
+            log.info("timeline: {}", time);
+            convert.splitVideo(video, time);
+        }
     }
 }

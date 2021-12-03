@@ -13,12 +13,11 @@ import java.util.List;
 public class Video {
 
     private String pathToVideo;
+    private String pathToMarker;
     private String courseName;
     private String courseUrl;
     private String description;
-    private String sectionName;
-    private String markers;
-    private boolean active;
+    private String tableOfContents;
     private List<String> tags = new ArrayList<>();
     private List<Timeline> timelines = new ArrayList<>();
 }

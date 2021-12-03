@@ -1,6 +1,7 @@
 package com.maryanto.dimas.example.services;
 
 import com.maryanto.dimas.example.model.Timeline;
+import com.maryanto.dimas.example.model.Video;
 import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
@@ -10,6 +11,7 @@ import net.bramp.ffmpeg.builder.FFmpegBuilder;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 import net.bramp.ffmpeg.progress.Progress;
 import net.bramp.ffmpeg.progress.ProgressListener;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +42,7 @@ public class FFMpegService {
         return this.ffprobe.version();
     }
 
-    public void splitVideo(String courseName, String section, String file, Timeline timeline) throws IOException {
+    public void splitVideo(Video video, Timeline timeline) throws IOException {
         // count between 00:00:00 to startAt video play
         LocalTime start = LocalTime.parse("00:00:00");
         long startOffset = start.until(timeline.getTimeStart(), ChronoUnit.SECONDS);
@@ -48,35 +50,30 @@ public class FFMpegService {
         // count between startAt to end playback
         long duration = timeline.getTimeStart().until(timeline.getTimeEnd(), ChronoUnit.SECONDS);
 
-        File originalFile = new File(file);
+        File originalFile = new File(video.getPathToVideo());
+
         if (!originalFile.exists())
             throw new IOException("File video not found");
 
         if (originalFile.isDirectory())
             throw new IOException("File is video, change to video path");
 
-        FFmpegProbeResult input = ffprobe.probe(file);
-
-        String outputDir = new StringBuilder(getHomeDir()).append(File.separator)
-                .append("Videos").append(File.separator)
-                .append("Udemy").append(File.separator)
-                .append(courseName).append(File.separator)
-                .append(section).append(File.separator)
-                .append(originalFile.getName()).append(File.separator)
-                .toString();
-
-        File dir = new File(outputDir);
+        File dir = new File(originalFile.getParentFile().getAbsolutePath() + File.separator + FilenameUtils.removeExtension(originalFile.getName()));
+        String exportedFile = dir.getAbsolutePath() + File.separator + timeline.getExportFilename();
+        log.info("file will be available after slice on {}", exportedFile);
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
+        FFmpegProbeResult input = ffprobe.probe(video.getPathToVideo());
+
         FFmpegBuilder builder = this.ffmpeg.builder().addInput(input).overrideOutputFiles(true)
-                .addOutput(outputDir + timeline.getExportFilename())
-                    .setStartOffset(startOffset, TimeUnit.SECONDS)
-                    .setDuration(duration, TimeUnit.SECONDS)
-                    .setVideoResolution(1920, 1080)
-                    .setVideoCodec("copy")
-                    .setAudioCodec("copy")
+                .addOutput(exportedFile)
+                .setStartOffset(startOffset, TimeUnit.SECONDS)
+                .setDuration(duration, TimeUnit.SECONDS)
+                .setVideoResolution(1920, 1080)
+                .setVideoCodec("copy")
+                .setAudioCodec("copy")
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL)
                 .done();
 
