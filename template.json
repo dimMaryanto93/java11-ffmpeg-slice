@@ -1,7 +1,11 @@
 {
   "pathToVideo": "/Volumes/SamsungSSD/Udemy/docker/exports/10f-deploy-multiple-projects-using-compose.mp4",
   "pathToMarker": "template.3.und.txt",
-  "description": "",
+  "course": {
+    "name": "DevOps: Docker pemula sampai Mahir",
+    "url": "https://www.udemy.com/course/docker-pemula-sampai-mahir",
+    "refCode": "8D13D85D4D34027B76BE"
+  },
   "tags": [
     "docker",
     "compose",

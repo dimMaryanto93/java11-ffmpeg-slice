@@ -14,8 +14,7 @@ public class Video {
 
     private String pathToVideo;
     private String pathToMarker;
-    private String courseName;
-    private String courseUrl;
+    private Course course;
     private String description;
     private String tableOfContents;
     private List<String> tags = new ArrayList<>();
