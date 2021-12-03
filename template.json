@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "",
+  "description": "Hai semuanya, di video study kasus kali ini kita akan membahas tentang Multiple project dengan git sub-module menggunakan docker-compose",
   "tags": [
     "docker",
     "compose",

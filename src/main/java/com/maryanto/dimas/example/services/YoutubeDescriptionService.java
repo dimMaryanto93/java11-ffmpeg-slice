@@ -13,7 +13,7 @@ public class YoutubeDescriptionService {
         Course course = video.getCourse();
         List<Instructure> instructures = course.getInstructures();
         List<String> tags = video.getTags();
-        return String.format("%s\n%s\n%s\n\n%s\n%s\n\nTOC:\n%s",
+        return String.format("%s\n\n%s\n\n%s\n\n%s\n%s\n\nTOC:\n%s",
                 unlockVideo(course),
                 video.getDescription(),
                 instructureProfiles(instructures),
