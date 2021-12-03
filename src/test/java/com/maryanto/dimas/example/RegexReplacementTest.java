@@ -35,6 +35,8 @@ public class RegexReplacementTest extends TestCase {
     @Test
     public void testConvertToTimeline() {
         List<Timeline> timelines = ScreenflowMarkersToYoutubeClipService.convertToTimeline(text);
-        log.info("timeline: {}", timelines);
+        for (Timeline time : timelines) {
+            log.info("timeline: {}", time);
+        }
     }
 }

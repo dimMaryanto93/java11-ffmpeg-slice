@@ -45,3 +45,11 @@ java -jar target/ffmpeg-split-video-1.0.0-jar-with-dependencies.jar template.jso
 ```
 
 See the log, video output folder directory.
+
+## Marker format in screenflow
+
+Untuk menggunakan program ini, ada requirement yang harus di penuhi jika tidak flownya tidak susuai
+
+1. Minimum **memiliki 2 marker** dalam suatu screenflow timeline
+2. buat marker pada `00:00:00` untuk menandakan video dimulai dari awal
+3. buat marker di akhir dengan mengurangi durasi sedikit, untuk menandakan video berakhir

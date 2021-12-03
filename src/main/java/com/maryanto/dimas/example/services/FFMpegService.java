@@ -8,6 +8,8 @@ import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFmpegUtils;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
+import net.bramp.ffmpeg.info.Codec;
+import net.bramp.ffmpeg.info.Format;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 import net.bramp.ffmpeg.progress.Progress;
 import net.bramp.ffmpeg.progress.ProgressListener;
@@ -17,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -40,6 +44,11 @@ public class FFMpegService {
 
     public String getFFProbeVersion() throws IOException {
         return this.ffprobe.version();
+    }
+
+    public void getTotalDurationOfVideo(Video video) throws IOException {
+        FFmpegProbeResult input = ffprobe.probe(video.getPathToVideo());
+
     }
 
     public void splitVideo(Video video, Timeline timeline) throws IOException {
@@ -67,7 +76,8 @@ public class FFMpegService {
 
         FFmpegProbeResult input = ffprobe.probe(video.getPathToVideo());
 
-        FFmpegBuilder builder = this.ffmpeg.builder().addInput(input).overrideOutputFiles(true)
+        FFmpegBuilder builder = this.ffmpeg.builder()
+                .addInput(input).overrideOutputFiles(true)
                 .addOutput(exportedFile)
                 .setStartOffset(startOffset, TimeUnit.SECONDS)
                 .setDuration(duration, TimeUnit.SECONDS)
