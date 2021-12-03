@@ -36,9 +36,7 @@ How to using this program, first you need JDK/JRE 11 on local machine dan ffmpeg
 
 1. Download file `template.json`, and then replace value on properties:
    1. var `pathToVideo`, define video you want to split
-   2. var `courseName`, `sectionName` define folder to export directory location
-   3. var `markers`, define to convert youtube clip from screenflow markers using subler
-   4. var `timelines`, define time startOffset and limit for split video
+   2. var `pathToMarker`, generate your marker from video using [subler](https://subler.org/) then insert file path
    5. var `tags`, add tags to your youtube description video
 2. Download release app, then run with param
 
@@ -46,8 +44,4 @@ How to using this program, first you need JDK/JRE 11 on local machine dan ffmpeg
 java -jar target/ffmpeg-split-video-1.0.0-jar-with-dependencies.jar template.json
 ```
 
-3. After you execute, video export location is `${home}/${courseName}/${sectionName}/${filename-pathToVideo}/`
-   1. var `${home}`, user directory berdasarkan OS, jika windows default `C:/User/your-user`
-   2. var `${courseName}`
-   3. var `${sectionName}`
-   4. var `${filename-pathToVideo}`, adalah nama dari file video yang kita input
+See the log, video output folder directory.
