@@ -5,6 +5,7 @@ import com.maryanto.dimas.example.model.Video;
 import com.maryanto.dimas.example.services.FFMpegService;
 import com.maryanto.dimas.example.services.JsonTemplateLoaderService;
 import com.maryanto.dimas.example.services.ScreenflowMarkersToYoutubeClipService;
+import com.maryanto.dimas.example.services.YoutubeDescriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
@@ -39,6 +40,12 @@ public class App {
             String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             video.setTimelines(ScreenflowMarkersToYoutubeClipService.convertToTimeline(content));
             video.setTableOfContents(ScreenflowMarkersToYoutubeClipService.convertToYoutubeDescription(content));
+
+            String template = YoutubeDescriptionService.template(video);
+            log.info("youtube description: \n" +
+                    "----------------------------" +
+                    "\n{}\n" +
+                    "----------------------------", template);
         }
 
         for (Timeline time : video.getTimelines()) {

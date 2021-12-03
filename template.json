@@ -3,9 +3,16 @@
   "pathToMarker": "template.3.und.txt",
   "course": {
     "name": "DevOps: Docker pemula sampai Mahir",
-    "url": "https://www.udemy.com/course/docker-pemula-sampai-mahir",
-    "refCode": "8D13D85D4D34027B76BE"
+    "url": "https://www.udemy.com/course/docker-pemula-sampai-mahir/",
+    "refCode": "8D13D85D4D34027B76BE",
+    "instructures": [
+      {
+        "name": "Dimas Maryanto",
+        "email": "dimmaryanto@gmail.com"
+      }
+    ]
   },
+  "description": "",
   "tags": [
     "docker",
     "compose",
