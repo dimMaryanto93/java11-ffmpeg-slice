@@ -3,17 +3,30 @@ package com.maryanto.dimas.example.services;
 import com.maryanto.dimas.example.model.Course;
 import com.maryanto.dimas.example.model.Instructure;
 import com.maryanto.dimas.example.model.Video;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class YoutubeDescriptionService {
 
-    public static String template(Video video) {
+    public static String template(Video video) throws IOException {
         Course course = video.getCourse();
         List<Instructure> instructures = course.getInstructures();
         List<String> tags = video.getTags();
-        return String.format("%s\n\n%s\n\n%s\n\n%s\n%s\n\nTOC:\n%s",
+        File dir = new File(video.getPathToVideo());
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File file = new File(dir.getParentFile().getAbsolutePath() + File.separator + FilenameUtils.removeExtension(dir.getName()) + ".yt.txt");
+
+        String text = String.format("%s\n\n%s\n\n%s\n\n%s\n%s\n\nTOC:\n%s",
                 unlockVideo(course),
                 video.getDescription(),
                 instructureProfiles(instructures),
@@ -21,6 +34,8 @@ public class YoutubeDescriptionService {
                 tags(tags),
                 video.getTableOfContents()
         );
+        FileUtils.writeStringToFile(file, text, StandardCharsets.UTF_8);
+        return text;
     }
 
     private static String unlockVideo(Course course) {
