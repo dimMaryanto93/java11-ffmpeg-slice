@@ -46,7 +46,7 @@ public class YoutubeDescriptionService {
     private static String instructureProfiles(List<Instructure> instructures) {
         return String.format(
                 "Pemateri: \n%s", instructures.stream()
-                        .map(data -> String.format("%s <%s>", data.getName(), data.getEmail()))
+                        .map(data -> String.format("%s (%s)", data.getName(), data.getEmail()))
                         .collect(Collectors.joining("\n"))
         );
     }
